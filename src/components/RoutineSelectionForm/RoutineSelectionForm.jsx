@@ -25,6 +25,18 @@ const RoutineSelectionForm = () => {
         { name: "Five", value: "five" },
     ];
 
+    const classesEV = [
+        { name: "Pre Play (EV)", value: "prePlayEV" },
+        { name: "Play (EV)", value: "playEV" },
+        { name: "Nursery (EV)", value: "nurseryEV" },
+        { name: "K.G (EV)", value: "kgEV" },
+        { name: "One (EV)", value: "oneEV" },
+        { name: "Two (EV)", value: "twoEV                          " },
+        { name: "Three (EV)", value: "threeEV" },
+        { name: "Four (EV)", value: "fourEV" },
+        { name: "Five (EV)", value: "fiveEV" },
+    ];
+
     const sessions = [
         { name: "First Term", value: "firsTerm" },
         { name: "Second Term", value: "secondTerm" },
@@ -40,8 +52,8 @@ const RoutineSelectionForm = () => {
     ];
 
     const versions = [
-        { name: "Bangla", value: "bangla" },
         { name: "English", value: "english" },
+        { name: "Bangla", value: "bangla" },
     ];
 
     const handleYear = (e) => {
@@ -74,9 +86,14 @@ const RoutineSelectionForm = () => {
         setSelectedVersion(e.target.value);
     }
 
+    const handleSelectionForm = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+    }
+
     return (
         <div>
-            <form className="text-center w-full md:w-6/12 mx-auto">
+            <form onSubmit={handleSelectionForm} className="text-center w-full md:w-6/12 mx-auto">
                 {
                     (years) ?
                         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
@@ -88,7 +105,7 @@ const RoutineSelectionForm = () => {
                         </fieldset> : ''
                 }
                 {
-                    (selectedYear) ?
+                    (years && selectedYear) ?
                         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
                             <legend className="fieldset-legend text-left">Version</legend>
                             <select defaultValue={""} onChange={handleVersion} className="select select-success w-full">
@@ -98,7 +115,7 @@ const RoutineSelectionForm = () => {
                         </fieldset> : ''
                 }
                 {
-                    (selectedVersion) ?
+                    (years && selectedYear && selectedVersion === "bangla") ?
                         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
                             <legend className="fieldset-legend text-left">Class</legend>
                             <select defaultValue={""} onChange={handleClass} className="select select-success w-full">
@@ -108,7 +125,17 @@ const RoutineSelectionForm = () => {
                         </fieldset> : ''
                 }
                 {
-                    (selectedClass) ?
+                    (years && selectedYear && selectedVersion === "english") ?
+                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                            <legend className="fieldset-legend text-left">Class</legend>
+                            <select defaultValue={""} onChange={handleClass} className="select select-success w-full">
+                                <option value="" className="bg-gray-400">Select Class</option>
+                                {classesEV.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
+                            </select>
+                        </fieldset> : ''
+                }
+                {
+                    (years && selectedYear && selectedVersion && selectedClass) ?
                         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
                             <legend className="fieldset-legend text-left">Session</legend>
                             <select defaultValue={""} onChange={handleSession} className="select select-success w-full">
@@ -118,7 +145,7 @@ const RoutineSelectionForm = () => {
                         </fieldset> : ''
                 }
                 {
-                    (selectedSession) ?
+                    (years && selectedYear && selectedVersion && selectedClass && selectedSession) ?
                         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
                             <legend className="fieldset-legend text-left">Section</legend>
                             <select defaultValue={""} onChange={handleSection} className="select select-success w-full">
@@ -126,6 +153,11 @@ const RoutineSelectionForm = () => {
                                 {sections.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
                             </select>
                         </fieldset> : ''
+                }
+                <br />
+                {
+                    (years && selectedYear && selectedVersion && selectedClass && selectedSession && selectedSection) ?
+                        <button type="submit" className="btn btn-soft btn-primary">Submit</button> : ""
                 }
             </form>
         </div>
