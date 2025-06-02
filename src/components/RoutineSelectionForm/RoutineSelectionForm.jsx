@@ -88,7 +88,14 @@ const RoutineSelectionForm = () => {
 
     const handleSelectionForm = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
+        const selectionInfo = {
+            selectedYear,
+            selectedVersion,
+            selectedClass,
+            selectedSession,
+            selectedSection,
+        };
+        console.log(selectionInfo);
     }
 
     return (
