@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const RoutineSelectionForm = () => {
 
+    const { dresses } = useContext(AuthContext);
     const [selectedYear, setSelectedYear] = useState(null);
     const [selectedSession, setSelectedSession] = useState(null);
     const [selectedSection, setSelectedSection] = useState(null);
     const [selectedClass, setSelectedClass] = useState(null);
     const [selectedVersion, setSelectedVersion] = useState(null);
+
+    if (dresses) {
+        console.log(dresses);
+    }
 
     const years = [
         { name: "2024", value: "2024" },

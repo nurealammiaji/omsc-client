@@ -2,22 +2,16 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />
-  },
-])
+import { RouterProvider } from "react-router-dom";
+import AuthProvider from '../providers/AuthProvider.jsx';
+import PublicRoutes from '../routes/PublicRoutes.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={routes}>
-      <App />
-    </RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={PublicRoutes}>
+        <App />
+      </RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )
