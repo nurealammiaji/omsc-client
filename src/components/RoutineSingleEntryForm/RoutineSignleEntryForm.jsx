@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { SelctionContext } from '../../../providers/SelectionProvider'
+import { SelectionContext } from '../../../providers/SelectionProvider'
 
 const RoutineSignleEntryForm = () => {
 
-    const { selection } = useContext(SelctionContext);
+    const { selection } = useContext(SelectionContext);
 
     if (selection) {
         console.log({ selection });

@@ -1,12 +1,11 @@
 import React from 'react'
-import RoutineSelection from '../../components/RoutineSelection/RoutineSelection'
 import Routine from './Routine/Routine'
+import RoutineSelection from './RoutineSelection/RoutineSelection'
 
 const Student = () => {
   return (
     <div>
       <RoutineSelection />
-      {/* <Routine /> */}
     </div>
   )
 }

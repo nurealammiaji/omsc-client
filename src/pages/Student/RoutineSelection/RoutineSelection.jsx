@@ -1,6 +1,7 @@
 import React from 'react'
-import RoutineSelectionForm from '../RoutineSelectionForm/RoutineSelectionForm'
+
 import logo from "/logo.png"
+import RoutineSelectionForm from './../../../components/RoutineSelectionForm/RoutineSelectionForm';
 
 const RoutineSelection = () => {
   return (

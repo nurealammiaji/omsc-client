@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { SelctionContext } from '../../../providers/SelectionProvider';
+import { SelectionContext } from '../../../providers/SelectionProvider';
 
 const RoutineSelectionForm = () => {
 
-    const { setSelection } = useContext(SelctionContext);
+    const { setSelection } = useContext(SelectionContext);
 
     const [selectedYear, setSelectedYear] = useState(null);
     const [selectedSession, setSelectedSession] = useState(null);
@@ -68,10 +68,6 @@ const RoutineSelectionForm = () => {
         { name: "Multiple Entry", value: "multipleEntry" }
     ];
 
-    const subjects = [
-        {name: "Enlish"}
-    ];
-
     const handleYear = (e) => {
         e.preventDefault();
         console.log(e.target.value);
@@ -120,6 +116,7 @@ const RoutineSelectionForm = () => {
         };
         console.log(selectionSummary);
         setSelection(selectionSummary);
+        navigate("/entry", { replace: true });
     }
 
     return (
@@ -129,7 +126,7 @@ const RoutineSelectionForm = () => {
                     {
                         (years) ?
                             <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                                <legend className="fieldset-legend text-left bg-white">Year</legend>
+                                <legend className="fieldset-legend text-left">Year</legend>
                                 <select onChange={handleYear} defaultValue={""} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Year</option>
                                     {years.map((y, index) => <option key={index} value={y.value}>{y.name}</option>)}

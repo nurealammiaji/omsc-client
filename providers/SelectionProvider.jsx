@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-export const SelctionContext = createContext();
+export const SelectionContext = createContext();
 
 const SelectionProvider = ({ children }) => {
 
@@ -12,9 +12,9 @@ const SelectionProvider = ({ children }) => {
     };
 
     return (
-        <SelctionContext.Provider value={selectionInfo}>
+        <SelectionContext.Provider value={selectionInfo}>
             {children}
-        </SelctionContext.Provider>
+        </SelectionContext.Provider>
     )
 }
 
