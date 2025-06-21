@@ -1,18 +1,19 @@
 import React, { useContext, useState } from 'react'
-import { AuthContext } from '../../../providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import { SelctionContext } from '../../../providers/SelectionProvider';
 
 const RoutineSelectionForm = () => {
 
-    const { dresses } = useContext(AuthContext);
+    const { setSelection } = useContext(SelctionContext);
+
     const [selectedYear, setSelectedYear] = useState(null);
     const [selectedSession, setSelectedSession] = useState(null);
     const [selectedSection, setSelectedSection] = useState(null);
     const [selectedClass, setSelectedClass] = useState(null);
     const [selectedVersion, setSelectedVersion] = useState(null);
+    const [selectedEntryType, setSelectedEntryType] = useState(null);
 
-    if (dresses) {
-        console.log(dresses);
-    }
+    const navigate = useNavigate();
 
     const years = [
         { name: "2024", value: "2024" },
@@ -37,7 +38,7 @@ const RoutineSelectionForm = () => {
         { name: "Nursery (EV)", value: "nurseryEV" },
         { name: "K.G (EV)", value: "kgEV" },
         { name: "One (EV)", value: "oneEV" },
-        { name: "Two (EV)", value: "twoEV                          " },
+        { name: "Two (EV)", value: "twoEV" },
         { name: "Three (EV)", value: "threeEV" },
         { name: "Four (EV)", value: "fourEV" },
         { name: "Five (EV)", value: "fiveEV" },
@@ -60,6 +61,15 @@ const RoutineSelectionForm = () => {
     const versions = [
         { name: "English", value: "english" },
         { name: "Bangla", value: "bangla" },
+    ];
+
+    const entryTypes = [
+        { name: "Single Entry", value: "singleEntry" },
+        { name: "Multiple Entry", value: "multipleEntry" }
+    ];
+
+    const subjects = [
+        {name: "Enlish"}
     ];
 
     const handleYear = (e) => {
@@ -92,86 +102,108 @@ const RoutineSelectionForm = () => {
         setSelectedVersion(e.target.value);
     }
 
+    const handleEntryType = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        setSelectedEntryType(e.target.value);
+    }
+
     const handleSelectionForm = (e) => {
         e.preventDefault();
-        const selectionInfo = {
+        const selectionSummary = {
             selectedYear,
             selectedVersion,
             selectedClass,
             selectedSession,
             selectedSection,
+            selectedEntryType,
         };
-        console.log(selectionInfo);
+        console.log(selectionSummary);
+        setSelection(selectionSummary);
     }
 
     return (
         <div>
             <form onSubmit={handleSelectionForm} className="text-center w-full md:w-6/12 mx-auto">
-                {
-                    (years) ?
-                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                            <legend className="fieldset-legend text-left">Year</legend>
-                            <select onChange={handleYear} defaultValue={""} className="select select-success w-full">
-                                <option value="" className="bg-gray-400">Select Year</option>
-                                {years.map((y, index) => <option key={index} value={y.value}>{y.name}</option>)}
-                            </select>
-                        </fieldset> : ''
-                }
-                {
-                    (years && selectedYear) ?
-                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                            <legend className="fieldset-legend text-left">Version</legend>
-                            <select defaultValue={""} onChange={handleVersion} className="select select-success w-full">
-                                <option value="" className="bg-gray-400">Select Version</option>
-                                {versions.map((v, index) => <option key={index} value={v.value}>{v.name}</option>)}
-                            </select>
-                        </fieldset> : ''
-                }
-                {
-                    (years && selectedYear && selectedVersion === "bangla") ?
-                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                            <legend className="fieldset-legend text-left">Class</legend>
-                            <select defaultValue={""} onChange={handleClass} className="select select-success w-full">
-                                <option value="" className="bg-gray-400">Select Class</option>
-                                {classes.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
-                            </select>
-                        </fieldset> : ''
-                }
-                {
-                    (years && selectedYear && selectedVersion === "english") ?
-                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                            <legend className="fieldset-legend text-left">Class</legend>
-                            <select defaultValue={""} onChange={handleClass} className="select select-success w-full">
-                                <option value="" className="bg-gray-400">Select Class</option>
-                                {classesEV.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
-                            </select>
-                        </fieldset> : ''
-                }
-                {
-                    (years && selectedYear && selectedVersion && selectedClass) ?
-                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                            <legend className="fieldset-legend text-left">Session</legend>
-                            <select defaultValue={""} onChange={handleSession} className="select select-success w-full">
-                                <option value="" className="bg-gray-400">Select Session</option>
-                                {sessions.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
-                            </select>
-                        </fieldset> : ''
-                }
-                {
-                    (years && selectedYear && selectedVersion && selectedClass && selectedSession) ?
-                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
-                            <legend className="fieldset-legend text-left">Section</legend>
-                            <select defaultValue={""} onChange={handleSection} className="select select-success w-full">
-                                <option value="" className="bg-gray-400">Select Section</option>
-                                {sections.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
-                            </select>
-                        </fieldset> : ''
-                }
+                <div className='grid grid-cols-3 gap-5'>
+                    {
+                        (years) ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left bg-white">Year</legend>
+                                <select onChange={handleYear} defaultValue={""} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Year</option>
+                                    {years.map((y, index) => <option key={index} value={y.value}>{y.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                    {
+                        (years && selectedYear) ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Version</legend>
+                                <select defaultValue={""} onChange={handleVersion} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Version</option>
+                                    {versions.map((v, index) => <option key={index} value={v.value}>{v.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                    {
+                        (years && selectedYear && selectedVersion === "bangla") ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Class</legend>
+                                <select defaultValue={""} onChange={handleClass} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Class</option>
+                                    {classes.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                    {
+                        (years && selectedYear && selectedVersion === "english") ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Class</legend>
+                                <select defaultValue={""} onChange={handleClass} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Class</option>
+                                    {classesEV.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                    {
+                        (years && selectedYear && selectedVersion && selectedClass) ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Session</legend>
+                                <select defaultValue={""} onChange={handleSession} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Session</option>
+                                    {sessions.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                    {
+                        (years && selectedYear && selectedVersion && selectedClass && selectedSession) ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Section</legend>
+                                <select defaultValue={""} onChange={handleSection} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Section</option>
+                                    {sections.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                    {
+                        (years && selectedYear && selectedVersion && selectedClass && selectedSession && selectedSection) ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Entry Type</legend>
+                                <select defaultValue={""} onChange={handleEntryType} className="select select-success w-full text-center">
+                                    <option value="" className="bg-gray-400">Select Entry Type</option>
+                                    {entryTypes.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
+                                </select>
+                            </fieldset> : ''
+                    }
+                </div>
                 <br />
-                {
-                    (years && selectedYear && selectedVersion && selectedClass && selectedSession && selectedSection) ?
-                        <button type="submit" className="btn btn-soft btn-primary">Submit</button> : ""
-                }
+                <div className='text-center'>
+                    {
+                        (years && selectedYear && selectedVersion && selectedClass && selectedSession && selectedSection && selectedEntryType) ?
+                            <button type="submit" className="btn btn-soft btn-primary">Submit</button> : ""
+                    }
+                </div>
             </form>
         </div>
     )
