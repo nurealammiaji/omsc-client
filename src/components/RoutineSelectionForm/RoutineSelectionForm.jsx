@@ -64,8 +64,8 @@ const RoutineSelectionForm = () => {
     ];
 
     const entryTypes = [
-        { name: "Single Entry", value: "singleEntry" },
-        { name: "Multiple Entry", value: "multipleEntry" }
+        { name: "Single", value: "single" },
+        { name: "Multiple", value: "multiple" }
     ];
 
     const handleYear = (e) => {
@@ -129,7 +129,7 @@ const RoutineSelectionForm = () => {
                                 <legend className="fieldset-legend text-left">Year</legend>
                                 <select onChange={handleYear} defaultValue={""} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Year</option>
-                                    {years.map((y, index) => <option key={index} value={y.value}>{y.name}</option>)}
+                                    {years.map((y, index) => <option key={index} value={y.name}>{y.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
@@ -139,27 +139,27 @@ const RoutineSelectionForm = () => {
                                 <legend className="fieldset-legend text-left">Version</legend>
                                 <select defaultValue={""} onChange={handleVersion} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Version</option>
-                                    {versions.map((v, index) => <option key={index} value={v.value}>{v.name}</option>)}
+                                    {versions.map((v, index) => <option key={index} value={v.name}>{v.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
                     {
-                        (years && selectedYear && selectedVersion === "bangla") ?
+                        (years && selectedYear && selectedVersion === "Bangla") ?
                             <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
                                 <legend className="fieldset-legend text-left">Class</legend>
                                 <select defaultValue={""} onChange={handleClass} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Class</option>
-                                    {classes.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
+                                    {classes.map((c, index) => <option key={index} value={c.name}>{c.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
                     {
-                        (years && selectedYear && selectedVersion === "english") ?
+                        (years && selectedYear && selectedVersion === "English") ?
                             <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
                                 <legend className="fieldset-legend text-left">Class</legend>
                                 <select defaultValue={""} onChange={handleClass} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Class</option>
-                                    {classesEV.map((c, index) => <option key={index} value={c.value}>{c.name}</option>)}
+                                    {classesEV.map((c, index) => <option key={index} value={c.name}>{c.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
@@ -169,7 +169,7 @@ const RoutineSelectionForm = () => {
                                 <legend className="fieldset-legend text-left">Session</legend>
                                 <select defaultValue={""} onChange={handleSession} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Session</option>
-                                    {sessions.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
+                                    {sessions.map((s, index) => <option key={index} value={s.name}>{s.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
@@ -179,7 +179,7 @@ const RoutineSelectionForm = () => {
                                 <legend className="fieldset-legend text-left">Section</legend>
                                 <select defaultValue={""} onChange={handleSection} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Section</option>
-                                    {sections.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
+                                    {sections.map((s, index) => <option key={index} value={s.name}>{s.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
@@ -189,7 +189,7 @@ const RoutineSelectionForm = () => {
                                 <legend className="fieldset-legend text-left">Entry Type</legend>
                                 <select defaultValue={""} onChange={handleEntryType} className="select select-success w-full text-center">
                                     <option value="" className="bg-gray-400">Select Entry Type</option>
-                                    {entryTypes.map((s, index) => <option key={index} value={s.value}>{s.name}</option>)}
+                                    {entryTypes.map((s, index) => <option key={index} value={s.name}>{s.name}</option>)}
                                 </select>
                             </fieldset> : ''
                     }
