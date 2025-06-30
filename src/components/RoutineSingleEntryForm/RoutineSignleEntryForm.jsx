@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { SelectionContext } from '../../../providers/SelectionProvider'
 
-const RoutineSignleEntryForm = () => {
+const RoutineSingleEntryForm = () => {
 
     const { selection } = useContext(SelectionContext);
 
@@ -10,8 +10,8 @@ const RoutineSignleEntryForm = () => {
     }
 
     return (
-        <div>RoutineSignleEntryForm</div>
+        <div>RoutineSingleEntryForm</div>
     )
 }
 
-export default RoutineSignleEntryForm
+export default RoutineSingleEntryForm
