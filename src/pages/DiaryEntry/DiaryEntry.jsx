@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { SelectionContext } from '../../../../providers/SelectionProvider';
 import { Link } from 'react-router-dom';
+import { SelectionContext } from '../../../providers/SelectionProvider';
 
 
-const RoutineEntry = () => {
+const DiaryEntry = () => {
     const { selection } = useContext(SelectionContext);
 
     if (selection) {
@@ -57,4 +57,4 @@ const RoutineEntry = () => {
     );
 };
 
-export default RoutineEntry;
+export default DiaryEntry;

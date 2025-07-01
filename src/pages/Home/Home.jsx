@@ -1,10 +1,12 @@
 import React from 'react'
-import Student from '../Student/Student'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
     <div>
-      <Student />
+      <div>
+        <Link to={"/selection"} className='btn btn-success'>New Entry</Link>
+      </div>
     </div>
   )
 }

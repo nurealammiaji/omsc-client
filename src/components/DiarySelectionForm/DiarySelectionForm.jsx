@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { SelectionContext } from '../../../providers/SelectionProvider';
 
-const RoutineSelectionForm = () => {
+
+const DiarySelectionForm = () => {
 
     const { setSelection } = useContext(SelectionContext);
 
@@ -12,6 +13,7 @@ const RoutineSelectionForm = () => {
     const [selectedClass, setSelectedClass] = useState(null);
     const [selectedVersion, setSelectedVersion] = useState(null);
     const [selectedEntryType, setSelectedEntryType] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
 
     const navigate = useNavigate();
 
@@ -193,6 +195,13 @@ const RoutineSelectionForm = () => {
                                 </select>
                             </fieldset> : ''
                     }
+                    {
+                        (years && selectedYear && selectedVersion && selectedClass && selectedSession && selectedSection && selectedEntryType) ?
+                            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+                                <legend className="fieldset-legend text-left">Date</legend>
+                                <input type="date" className="input input-success w-full text-center" />
+                            </fieldset> : ''
+                    }
                 </div>
                 <br />
                 <div className='text-center'>
@@ -206,4 +215,4 @@ const RoutineSelectionForm = () => {
     )
 }
 
-export default RoutineSelectionForm
+export default DiarySelectionForm
